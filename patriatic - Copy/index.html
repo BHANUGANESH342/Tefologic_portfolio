@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patriotic Art Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Patriotic Art Generator</h1>
+
+    <!-- Form for user input -->
+    <form id="artworkForm">
+        <!-- Include input fields for user preferences -->
+        <!-- For simplicity, let's assume a button triggers artwork generation -->
+        <button type="submit" id="generateButton">Generate Artwork</button>
+    </form>
+
+    <!-- Display area for generated artwork -->
+    <div id="artworkContainer">
+        <img id="artworkImage" src="" alt="Generated Artwork">
+    </div>
+
+    <!-- JavaScript for handling form submission and displaying artwork -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const artworkForm = document.getElementById('artworkForm');
+            const generateButton = document.getElementById('generateButton');
+            const artworkImage = document.getElementById('artworkImage');
+
+            artworkForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // Fetch artwork URL from backend
+                const response = await fetch('/generate_artwork', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        // Include user input or predefined themes as needed
+                    })
+                });
+
+                const data = await response.json();
+
+                // Display generated artwork
+                artworkImage.src = data.artwork_url;
+            });
+        });
+    </script>
+</body>
+</html>
